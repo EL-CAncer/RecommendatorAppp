@@ -1,0 +1,8 @@
+@model List<Services>
+
+<h4>Search Results</h4>
+
+@foreach (var services in Model)
+{
+    @await Html.PartialAsync("Services", services)
+}

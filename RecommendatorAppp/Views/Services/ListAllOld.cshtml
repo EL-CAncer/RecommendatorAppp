@@ -1,0 +1,16 @@
+@model IEnumerable<Services>
+
+@{
+    var ModelName = "Search Services";
+    ViewData["Title"] = ModelName;
+}
+
+<h2>@ModelName</h2>
+<hr />
+
+@foreach (var service in Model)
+{
+    @await Html.PartialAsync("Servicesummary", service)
+}
+<br />
+    
