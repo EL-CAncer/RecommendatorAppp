@@ -77,8 +77,7 @@ namespace RecommendatorAppp.Controllers
                     "date" => reviewsList.OrderBy(x => x.Date),
                     "grade" => reviewsList.OrderBy(x => x.Grade),
                     "title" => reviewsList.OrderBy(x => x.Title),
-                    "Services name" => reviewsList.OrderBy(x => x.Services.Name),
-                    _ => reviewsList.OrderBy(x => x.Services.Id),
+                    
                 };
             }
             else
@@ -88,8 +87,7 @@ namespace RecommendatorAppp.Controllers
                     "date" => reviewsList.OrderByDescending(x => x.Date),
                     "grade" => reviewsList.OrderByDescending(x => x.Grade),
                     "title" => reviewsList.OrderByDescending(x => x.Title),
-                    "Services name" => reviewsList.OrderByDescending(x => x.Services.Name),
-                    _ => reviewsList.OrderByDescending(x => x.Services.Id),
+                    
                 };
             }
 

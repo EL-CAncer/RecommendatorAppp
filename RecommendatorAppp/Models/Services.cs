@@ -22,7 +22,7 @@ namespace RecommendatorAppp.Models
         [DataType(DataType.Text)]
         [Required]
         public string Name { get; set; }
-
+        
         [Range(0, 1000)]
         [DataType(DataType.Currency)]
         [Required]
@@ -45,6 +45,6 @@ namespace RecommendatorAppp.Models
 
         public virtual ICollection<ServiceInformation> ServiceInformation { get; set; }
         public virtual ICollection<Reviews> Reviews { get; set; }
-
+        public bool IsPizzaOfTheWeek { get; internal set; }
     }
 }

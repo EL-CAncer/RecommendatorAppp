@@ -9,7 +9,7 @@ namespace RecommendatorAppp.Repositories
     public interface IServicesRepository
     {
         IEnumerable<Services> Services { get; }
-        IEnumerable<Services> ServicesOfTheWeek { get; }
+        
 
         Services GetById(int? id);
         Task<Services> GetByIdAsync(int? id);
@@ -25,9 +25,9 @@ namespace RecommendatorAppp.Repositories
         IEnumerable<Services> GetAllIncluded();
         Task<IEnumerable<Services>> GetAllIncludedAsync();
 
-        void Add(Services pizza);
-        void Update(Services pizza);
-        void Remove(Services pizza);
+        void Add(Services services);
+        void Update(Services services);
+        void Remove(Services services);
 
         void SaveChanges();
         Task SaveChangesAsync();

@@ -23,18 +23,18 @@ namespace RecommendatorAppp.Models
 
         [Range(1, 5)]
         public int Grade { get; set; }
-
+        public int Name { get; set; }
         public DateTime Date { get; set; }
 
         [DisplayName("Select Service")]
         public int ServiceId { get; set; }
-
+        
         public virtual Services Service { get; set; }
 
         public string UserId { get; set; }
 
         public IdentityUser User { get; set; }
-        public object Services { get; internal set; }
+        public Services Services { get; internal set; }
         public int? ServicesId { get; internal set; }
     }
 }

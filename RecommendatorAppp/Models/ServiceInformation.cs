@@ -14,8 +14,8 @@ namespace RecommendatorAppp.Models
 
         public virtual Information Informations { get; set; }
         public virtual Services Services { get; set; }
-        public object Information { get; internal set; }
-        public object Name { get; internal set; }
-        public int? ServicesId { get; internal set; }
+        public virtual Information Information { get;  set; }
+        public virtual Services Name { get;  set; }
+        public int? ServicesId { get; set; }
     }
 }

@@ -78,52 +78,10 @@ namespace RecommendatorAppp.Controllers
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ListAll([Bind("SearchText")] SearchServicesViewModel model)
-        {
-            var Services = await _ServicesRepo.GetAllIncludedAsync();
-            if (model.SearchText == null || model.SearchText == string.Empty)
-            {
-                model.ServicesList = Services;
-                return View(model);
-            }
-
-            var input = model.SearchText.Trim();
-            if (input == string.Empty || input == null)
-            {
-                model.ServicesList = Services;
-                return View(model);
-            }
-            var searchString = input.ToLower();
-
-            if (string.IsNullOrEmpty(searchString))
-            {
-                model.ServicesList = Services;
-            }
-            else
-            {
-                var ServicesList = await _context.Services.Include(x => x.Category).Include(x => x.Reviews).Include(x => x.ServiceInformation).OrderBy(x => x.Name)
-                     .Where(p =>
-                     p.Name.ToLower().Contains(searchString)
-                  || p.Price.ToString("c").ToLower().Contains(searchString)
-                  || p.Category.Name.ToLower().Contains(searchString)
-                  || p.ServiceInformation.Select(x => x.Information.Name.ToLower()).Contains(searchString))
-                    .ToListAsync();
-
-                if (ServicesList.Any())
-                {
-                    model.ServicesList = ServicesList;
-                }
-                else
-                {
-                    model.ServicesList = new List<Services>();
-                }
-
-            }
-            return View(model);
-        }
+       
 
         // GET: Services
-        [AllowAnonymous]
+        
         public async Task<IActionResult> ListCategory(string categoryName)
         {
             bool categoryExtist = _context.Categories.Any(c => c.Name == categoryName);
@@ -223,36 +181,7 @@ namespace RecommendatorAppp.Controllers
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SearchServices([Bind("SearchText")] SearchServicesViewModel model)
-        {
-            var Services = await _ServicesRepo.GetAllIncludedAsync();
-            var search = model.SearchText.ToLower();
-
-            if (string.IsNullOrEmpty(search))
-            {
-                model.ServicesList = Services;
-            }
-            else
-            {
-                var ServicesList = await _context.Services.Include(x => x.Category).Include(x => x.Reviews).Include(x => x.ServiceInformation).OrderBy(x => x.Name)
-                    .Where(p =>
-                     p.Name.ToLower().Contains(search)
-                  || p.Price.ToString("c").ToLower().Contains(search)
-                  || p.Category.Name.ToLower().Contains(search)
-                  || p.ServiceInformation.Select(x => x.Information.Name.ToLower()).Contains(search)).ToListAsync();
-
-                if (ServicesList.Any())
-                {
-                    model.ServicesList = ServicesList;
-                }
-                else
-                {
-                    model.ServicesList = new List<Services>();
-                }
-
-            }
-            return View(model);
-        }
+       
 
         // GET: Services/Create
         public IActionResult Create()

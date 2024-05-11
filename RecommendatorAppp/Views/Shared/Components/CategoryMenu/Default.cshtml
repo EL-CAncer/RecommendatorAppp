@@ -1,7 +1,7 @@
-@model IEnumerable<Categories>
+@model IEnumerable<RecommendatorAppp.Models.Categories>
 
 <li class="dropdown">
-    <a asp-controller="Pizzas" asp-action="ListAll"
+    <a asp-controller="services" asp-action="ListAll"
        class="dropdown-toggle" data-toggle="dropdown">Categories<b class="caret"></b></a>
     <ul class="dropdown-menu">
         @foreach (var category in Model)
@@ -13,7 +13,7 @@
         }
         <li class="divider"></li>
         <li>
-            <a asp-controller="Pizzas" asp-action="ListAll" asp-route-category="">View all pizzas</a>
+            <a asp-controller="services" asp-action="ListAll" asp-route-category="">View all services</a>
         </li>
     </ul>
 </li>

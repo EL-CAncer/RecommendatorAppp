@@ -23,18 +23,18 @@
         <h4>Category: <b> @Model.Category.Name </b></h4>
         <p>@Model.Description</p>
         <p>
-            <h4><b>List of Ingredients:</b></h4>
+            <h4><b>List of Information:</b></h4>
 
-            @if (ViewBag.serviceIngredients.Count > 0)
+            @if (ViewBag.ServiceInformation.Count > 0)
         {
-                @foreach (var ing in ViewBag.serviceIngredients)
+                @foreach (var ing in ViewBag.ServiceInformation)
             {
                     <div> @ing </div>
                 }
             }
             else
             {
-                <div>No @Html.DisplayNameFor(Model => Model.serviceIngredients) was found. </div>
+                <div>No @Html.DisplayNameFor(Model => Model.ServiceInformation) was found. </div>
             }
         </p>
         <p>

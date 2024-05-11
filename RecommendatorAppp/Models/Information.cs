@@ -20,6 +20,7 @@ namespace RecommendatorAppp.Models
         public string Name { get; set; }
 
         public virtual ICollection<ServiceInformation> ServiceInformation { get; set; }
+        public virtual ICollection<Services> Services{ get; set; }
 
     }
 }
