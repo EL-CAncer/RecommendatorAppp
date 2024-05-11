@@ -34,7 +34,7 @@ namespace RecommendatorAppp.Models
         public string UserId { get; set; }
 
         public IdentityUser User { get; set; }
-        public Services Services { get; internal set; }
-        public int? ServicesId { get; internal set; }
+        //public Services Services { get; internal set; }
+        //public int? ServicesId { get; internal set; }
     }
 }

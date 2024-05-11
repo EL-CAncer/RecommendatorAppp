@@ -28,7 +28,7 @@ namespace RecommendatorAppp.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AdminIndex()
         {
-            var reviews = await _context.Reviews.Include(r => r.Services).Include(r => r.User).ToListAsync();
+            var reviews = await _context.Reviews.Include(r => r.Service).Include(r => r.User).ToListAsync();
             return View(reviews);
         }
 
@@ -41,12 +41,12 @@ namespace RecommendatorAppp.Controllers
 
             if (isAdmin)
             {
-                var allReviews = _context.Reviews.Include(r => r.Services).Include(r => r.User).ToList();
+                var allReviews = _context.Reviews.Include(r => r.Service).Include(r => r.User).ToList();
                 return View(allReviews);
             }
             else
             {
-                var reviews = _context.Reviews.Include(r => r.Services).Include(r => r.User)
+                var reviews = _context.Reviews.Include(r => r.Service).Include(r => r.User)
                     .Where(r => r.User == user).ToList();
                 return View(reviews);
             }
@@ -56,13 +56,13 @@ namespace RecommendatorAppp.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> ListAll()
         {
-            var reviews = await _context.Reviews.Include(r => r.Services).Include(r => r.User).ToListAsync();
+            var reviews = await _context.Reviews.Include(r => r.Service).Include(r => r.User).ToListAsync();
             return View(reviews);
         }
 
         private async Task<List<Reviews>> SortReviews(string sortBy, bool isDescending)
         {
-            var reviewsList = _context.Reviews.Include(r => r.Services).Include(r => r.User);
+            var reviewsList = _context.Reviews.Include(r => r.Service).Include(r => r.User);
             IQueryable<Reviews> result;
 
             if (sortBy == null || sortBy == "")
@@ -117,7 +117,7 @@ namespace RecommendatorAppp.Controllers
             {
                 return NotFound();
             }
-            var reviews = await _context.Reviews.Include(r => r.Services).Include(r => r.User).Where(x => x.Services.Id == Services.Id).ToListAsync();
+            var reviews = await _context.Reviews.Include(r => r.Service).Include(r => r.User).Where(x => x.Service.Id == Services.Id).ToListAsync();
             if (reviews == null)
             {
                 return NotFound();
@@ -138,7 +138,7 @@ namespace RecommendatorAppp.Controllers
             }
 
             var reviews = await _context.Reviews
-                .Include(r => r.Services)
+                .Include(r => r.Service)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (reviews == null)
             {
@@ -165,8 +165,8 @@ namespace RecommendatorAppp.Controllers
                 return NotFound();
             }
 
-            review.Services = Services;
-            review.ServicesId = Services.Id;
+            review.Service = Services;
+            review.ServiceId = Services.Id;
             ViewData["ServicesId"] = new SelectList(_context.Services.Where(p => p.Id == ServicesId), "Id", "Name");
             var listOfNumbers = new List<int>() { 1, 2, 3, 4, 5 };
             var listOfGrades = listOfNumbers.Select(x => new { Id = x, Value = x.ToString() });
@@ -179,7 +179,7 @@ namespace RecommendatorAppp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateWithServices(int ServicesId, Reviews reviews)
         {
-            if (ServicesId != reviews.ServicesId)
+            if (ServicesId != reviews.ServiceId)
             {
                 return NotFound();
             }
@@ -197,7 +197,7 @@ namespace RecommendatorAppp.Controllers
             var listOfNumbers = new List<int>() { 1, 2, 3, 4, 5 };
             var listOfGrades = listOfNumbers.Select(x => new { Id = x, Value = x.ToString() });
             ViewData["Grade"] = new SelectList(listOfGrades, "Id", "Value", reviews.Grade);
-            ViewData["ServicesId"] = new SelectList(_context.Services.Where(p => p.Id == ServicesId), "Id", "Name", reviews.ServicesId);
+            ViewData["ServicesId"] = new SelectList(_context.Services.Where(p => p.Id == ServicesId), "Id", "Name", reviews.ServiceId);
             return View(reviews);
         }
 
@@ -231,7 +231,7 @@ namespace RecommendatorAppp.Controllers
             var listOfNumbers = new List<int>() { 1, 2, 3, 4, 5 };
             var listOfGrades = listOfNumbers.Select(x => new { Id = x, Value = x.ToString() });
             ViewData["Grade"] = new SelectList(listOfGrades, "Id", "Value", reviews.Grade);
-            ViewData["ServicesId"] = new SelectList(_context.Services, "Id", "Name", reviews.ServicesId);
+            ViewData["ServicesId"] = new SelectList(_context.Services, "Id", "Name", reviews.ServiceId);
             
             return View(reviews);
         }
@@ -265,7 +265,7 @@ namespace RecommendatorAppp.Controllers
             var listOfNumbers = new List<int>() { 1, 2, 3, 4, 5 };
             var listOfGrades = listOfNumbers.Select(x => new { Id = x, Value = x.ToString() });
             ViewData["Grade"] = new SelectList(listOfGrades, "Id", "Value", reviews.Grade);
-            ViewData["ServicesId"] = new SelectList(_context.Services, "Id", "Name", reviews.ServicesId);
+            ViewData["ServicesId"] = new SelectList(_context.Services, "Id", "Name", reviews.ServiceId);
             return View(reviews);
         }
 
@@ -311,7 +311,7 @@ namespace RecommendatorAppp.Controllers
             var listOfNumbers = new List<int>() { 1, 2, 3, 4, 5 };
             var listOfGrades = listOfNumbers.Select(x => new { Id = x, Value = x.ToString() });
             ViewData["Grade"] = new SelectList(listOfGrades, "Id", "Value", reviews.Grade);
-            ViewData["ServicesId"] = new SelectList(_context.Services, "Id", "Name", reviews.ServicesId);
+            ViewData["ServicesId"] = new SelectList(_context.Services, "Id", "Name", reviews.ServiceId);
             return View(reviews);
         }
 
@@ -324,7 +324,7 @@ namespace RecommendatorAppp.Controllers
             }
 
             var reviews = await _context.Reviews
-                .Include(r => r.Services)
+                .Include(r => r.Service)
                 .SingleOrDefaultAsync(m => m.Id == id);
             var user = await _userManager.GetUserAsync(HttpContext.User);
             var userRoles = await _userManager.GetRolesAsync(user);

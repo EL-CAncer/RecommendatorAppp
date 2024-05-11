@@ -139,15 +139,15 @@ namespace RecommendatorAppp.Controllers
 
             var Services = await _ServicesRepo.GetByIdIncludedAsync(id);
 
-            var listOfInformation = await _context.ServiceInformation.Where(x => x.ServicesId == id).Select(x => x.Information.Name).ToListAsync();
+            var listOfInformation = await _context.ServiceInformation.Where(x => x.ServiceId == id).Select(x => x.Informations.Name).ToListAsync();
             ViewBag.ServiceInformation = listOfInformation;
 
             //var listOfReviews = await _context.Reviews.Where(x => x.ServicesId == id).Select(x => x).ToListAsync();
             //ViewBag.Reviews = listOfReviews;
             double score;
-            if (_context.Reviews.Any(x => x.ServicesId == id))
+            if (_context.Reviews.Any(x => x.ServiceId == id))
             {
-                var review = _context.Reviews.Where(x => x.ServicesId == id);
+                var review = _context.Reviews.Where(x => x.ServiceId == id);
                 score = review.Average(x => x.Grade);
                 score = Math.Round(score, 2);
             }

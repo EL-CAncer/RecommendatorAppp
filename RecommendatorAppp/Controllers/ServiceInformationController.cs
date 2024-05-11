@@ -24,7 +24,7 @@ namespace RecommendatorAppp.Controllers
         // GET: ServiceInformation
         public async Task<IActionResult> Index()
         {
-            var ApplicationDbContext = _context.ServiceInformation.Include(p => p.Information).Include(p => p.Services);
+            var ApplicationDbContext = _context.ServiceInformation.Include(p => p.Informations).Include(p => p.Services);
             return View(await ApplicationDbContext.ToListAsync());
         }
 
@@ -37,7 +37,7 @@ namespace RecommendatorAppp.Controllers
             }
 
             var ServiceInformation = await _context.ServiceInformation
-                .Include(p => p.Information)
+                .Include(p => p.Informations)
                 .Include(p => p.Services)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (ServiceInformation == null)
@@ -70,7 +70,7 @@ namespace RecommendatorAppp.Controllers
                 return RedirectToAction("Index");
             }
             ViewData["InformationId"] = new SelectList(_context.Information, "Id", "Name", ServiceInformation.InformationId);
-            ViewData["ServicesId"] = new SelectList(_context.Services, "Id", "Name", ServiceInformation.ServicesId);
+            ViewData["ServicesId"] = new SelectList(_context.Services, "Id", "Name", ServiceInformation.ServiceId);
             return View(ServiceInformation);
         }
 
@@ -88,7 +88,7 @@ namespace RecommendatorAppp.Controllers
                 return NotFound();
             }
             ViewData["InformationId"] = new SelectList(_context.Information, "Id", "Name", ServiceInformation.InformationId);
-            ViewData["ServicesId"] = new SelectList(_context.Services, "Id", "Name", ServiceInformation.ServicesId);
+            ViewData["ServicesId"] = new SelectList(_context.Services, "Id", "Name", ServiceInformation.ServiceId);
             return View(ServiceInformation);
         }
 
@@ -125,7 +125,7 @@ namespace RecommendatorAppp.Controllers
                 return RedirectToAction("Index");
             }
             ViewData["InformationId"] = new SelectList(_context.Information, "Id", "Name", ServiceInformation.InformationId);
-            ViewData["ServicesId"] = new SelectList(_context.Services, "Id", "Name", ServiceInformation.ServicesId);
+            ViewData["ServicesId"] = new SelectList(_context.Services, "Id", "Name", ServiceInformation.ServiceId);
             return View(ServiceInformation);
         }
 
@@ -138,7 +138,7 @@ namespace RecommendatorAppp.Controllers
             }
 
             var ServiceInformation = await _context.ServiceInformation
-                .Include(p => p.Information)
+                .Include(p => p.Informations)
                 .Include(p => p.Services)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (ServiceInformation == null)

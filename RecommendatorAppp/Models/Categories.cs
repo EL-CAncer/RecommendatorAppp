@@ -24,6 +24,6 @@ namespace RecommendatorAppp.Models
         public string Description { get; set; }
 
         public virtual ICollection<Services> Service { get; set; }
-        public object Services { get; internal set; }
+        //public object Services { get; internal set; }
     }
 }

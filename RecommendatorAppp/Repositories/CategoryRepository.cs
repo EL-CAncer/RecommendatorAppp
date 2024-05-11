@@ -17,7 +17,7 @@ namespace RecommendatorAppp.Repositories
             _context = context;
         }
 
-        public IEnumerable<Categories> Categories => _context.Categories.Include(x => x.Services); //include here
+        public IEnumerable<Categories> Categories => _context.Categories.Include(x => x.Service); //include here
 
         public void Add(Categories category)
         {

@@ -17,7 +17,7 @@ namespace RecommendatorAppp.Repositories
             _context = context;
         }
 
-        public IEnumerable<Reviews> Reviews => _context.Reviews.Include(x => x.Services); //include here
+        public IEnumerable<Reviews> Reviews => _context.Reviews.Include(x => x.Service); //include here
 
         public void Add(Reviews review)
         {

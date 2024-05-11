@@ -73,7 +73,7 @@ namespace RecommendatorAppp.Repositories
 
             var pizIngs = new List<ServiceInformation>()
             {
-                new ServiceInformation { Information = ing1, Services = piz1 },
+                new ServiceInformation { Informations = ing1, Services = piz1 },
                
             };
 

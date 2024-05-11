@@ -17,7 +17,7 @@ namespace RecommendatorAppp.Repositories
             _context = context;
         }
 
-        public IEnumerable<ServiceInformation> ServiceInformation => _context.ServiceInformation.Include(x => x.Services).Include(x => x.Information); //include here
+        public IEnumerable<ServiceInformation> ServiceInformation => _context.ServiceInformation.Include(x => x.Services).Include(x => x.Informations); //include here
 
         public void Add(ServiceInformation serviceInformation)
         {
