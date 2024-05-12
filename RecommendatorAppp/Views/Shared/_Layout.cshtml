@@ -35,7 +35,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-controller="Pizzas" asp-action="ListAll">Pizzas</a></li>
-                    @await Component.InvokeAsync("CategoryMenu")
+                    @*@await Component.InvokeAsync("CategoryMenu")*@
                     @if (SignInManager.IsSignedIn(User))
                     {
                         <li><a asp-controller="Reviews" asp-action="Index">Reviews</a></li>
@@ -45,7 +45,7 @@
                     {
                         <li><a asp-controller="Reviews" asp-action="ListAll">Reviews</a></li>
                     }
-                    @await Component.InvokeAsync("ShoppingCartSummary")
+                    @*@await Component.InvokeAsync("ShoppingCartSummary")*@
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
